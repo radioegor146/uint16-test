@@ -8,9 +8,15 @@ jobs:
       - uses: actions/checkout@v3
       - run: g++ main.cpp -O3 -o main
       - run: ./main
+      - uses: actions/upload-artifact@v4
+        with:
+          path: main
   test-macos:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v3
       - run: /Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -O3 -isysroot /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk main.cpp -o main 
       - run: ./main
+      - uses: actions/upload-artifact@v4
+        with:
+          path: main
