@@ -29,8 +29,6 @@ static const uint32_t NMH_ACC_INIT[32] = {
 };
 
 #define __NMH_M1 UINT32_C(0xF0D9649B)
-#define __NMH_M2 UINT32_C(0x29A7935D)
-#define __NMH_M3 UINT32_C(0x55D35831)
 
 NMH_ALIGN(NMH_ACC_ALIGN)
 static const uint32_t __NMH_M1_V[32] = {
@@ -42,10 +40,6 @@ static const uint32_t __NMH_M1_V[32] = {
 };
 
 bool nmhash32_broken(void) {
-  static bool done = false, result;
-  if (done)
-    return result;
-
   const char entropy[] =
       "rwgk8M1uxM6XX6c3teQX2yaw8FQWArmcWUSBJ8dcQQJWHYC9Wt2BmpvETxwhYcJTheTbjf49"
       "SVRaDJhbEZCq7ki1D6KxpKQSjgwqsiHGSgHLxvPG5kcRnBhjJ1YC8kuh";
@@ -67,9 +61,7 @@ bool nmhash32_broken(void) {
   for (i = 0; i < nbGroups; ++i)
     acc += accX[i];
 
-  result = (acc != UINT32_C(0x249abaee));
-  done = true;
-  return result;
+  return (acc != UINT32_C(0x249abaee));
 }
 
 int main(int argc, const char** argv) {
