@@ -9,15 +9,7 @@
 
 #define NMH_VECTOR NMH_SCALAR
 
-#if NMH_VECTOR > 0
-#define NMH_ACC_ALIGN 64
-#elif defined(__BIGGEST_ALIGNMENT__)
 #define NMH_ACC_ALIGN __BIGGEST_ALIGNMENT__
-#elif defined(__SDCC)
-#define NMH_ACC_ALIGN 1
-#else
-#define NMH_ACC_ALIGN 16
-#endif
 
 NMH_ALIGN(NMH_ACC_ALIGN)
 static const uint32_t NMH_ACC_INIT[32] = {
