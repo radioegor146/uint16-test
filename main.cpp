@@ -11,23 +11,6 @@
 
 #define NMH_ACC_ALIGN __BIGGEST_ALIGNMENT__
 
-NMH_ALIGN(NMH_ACC_ALIGN)
-static const uint32_t NMH_ACC_INIT[32] = {
-    UINT32_C(0xB8FE6C39), UINT32_C(0x23A44BBE), UINT32_C(0x7C01812C),
-    UINT32_C(0xF721AD1C), UINT32_C(0xDED46DE9), UINT32_C(0x839097DB),
-    UINT32_C(0x7240A4A4), UINT32_C(0xB7B3671F), UINT32_C(0xCB79E64E),
-    UINT32_C(0xCCC0E578), UINT32_C(0x825AD07D), UINT32_C(0xCCFF7221),
-    UINT32_C(0xB8084674), UINT32_C(0xF743248E), UINT32_C(0xE03590E6),
-    UINT32_C(0x813A264C),
-
-    UINT32_C(0x3C2852BB), UINT32_C(0x91C300CB), UINT32_C(0x88D0658B),
-    UINT32_C(0x1B532EA3), UINT32_C(0x71644897), UINT32_C(0xA20DF94E),
-    UINT32_C(0x3819EF46), UINT32_C(0xA9DEACD8), UINT32_C(0xA8FA763F),
-    UINT32_C(0xE39C343F), UINT32_C(0xF9DCBBC7), UINT32_C(0xC70B4F1D),
-    UINT32_C(0x8A51E04B), UINT32_C(0xCDB45931), UINT32_C(0xC89F7EC9),
-    UINT32_C(0xD9787364),
-};
-
 #define __NMH_M1 UINT32_C(0xF0D9649B)
 
 NMH_ALIGN(NMH_ACC_ALIGN)
@@ -44,27 +27,24 @@ bool nmhash32_broken(void) {
       "rwgk8M1uxM6XX6c3teQX2yaw8FQWArmcWUSBJ8dcQQJWHYC9Wt2BmpvETxwhYcJTheTbjf49"
       "SVRaDJhbEZCq7ki1D6KxpKQSjgwqsiHGSgHLxvPG5kcRnBhjJ1YC8kuh";
 
-  NMH_ALIGN(NMH_ACC_ALIGN)
-  uint32_t accX[sizeof(NMH_ACC_INIT) / sizeof(*NMH_ACC_INIT)];
-  static_assert(sizeof(entropy) >= sizeof(accX),
-                "Need more entropy in entropy[]");
+  NMH_ALIGN(NMH_ACC_ALIGN) uint32_t accX[32];
   memcpy(accX, entropy, sizeof(accX));
 
-  const size_t nbGroups = sizeof(NMH_ACC_INIT) / sizeof(*NMH_ACC_INIT);
   size_t i;
 
-  for (i = 0; i < nbGroups * 2; ++i) {
+  for (i = 0; i < 64; ++i) {
     ((uint16_t*)accX)[i] *= ((uint16_t*)__NMH_M1_V)[i];
   }
 
   uint32_t acc = 0;
-  for (i = 0; i < nbGroups; ++i)
+  for (i = 0; i < 32; ++i)
     acc += accX[i];
 
   return (acc != UINT32_C(0x249abaee));
 }
 
 int main(int argc, const char** argv) {
+  printf("%d\n", __BIGGEST_ALIGNMENT__);
   printf("%d\n", nmhash32_broken());
   return 0;
 }
