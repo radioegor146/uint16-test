@@ -25,6 +25,7 @@ bool nmhash32_broken(void) {
 
   for (i = 0; i < 64; ++i) {
     uint16_t t = ((uint16_t*)__NMH_M1_V)[i];
+    printf("%d\n", t);
     ((uint16_t*)accX)[i] *= t;
   }
 
