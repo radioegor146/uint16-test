@@ -3,14 +3,6 @@
 #include <cstdint>
 #include <cstring>
 
-#define NMH_ALIGN(n) __attribute__((aligned(n)))
-
-#define NMH_SCALAR 0
-
-#define NMH_VECTOR NMH_SCALAR
-
-#define NMH_ACC_ALIGN __BIGGEST_ALIGNMENT__
-
 #define __NMH_M1 UINT32_C(0xF0D9649B)
 
 static const uint32_t __NMH_M1_V[32] = {
@@ -32,7 +24,7 @@ bool nmhash32_broken(void) {
   size_t i;
 
   for (i = 0; i < 64; ++i) {
-    ((uint16_t*)accX)[i] *= ((uint16_t*)__NMH_M1_V)[i];
+    ((uint16_t*)accX)[i] *= (uint16_t)(UINT32_C(0xF0D9649B));//((uint16_t*)__NMH_M1_V)[i];
   }
 
   uint32_t acc = 0;
@@ -43,7 +35,6 @@ bool nmhash32_broken(void) {
 }
 
 int main(int argc, const char** argv) {
-  printf("%d\n", __BIGGEST_ALIGNMENT__);
   printf("%d\n", nmhash32_broken());
   return 0;
 }
