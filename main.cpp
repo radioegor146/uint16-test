@@ -36,7 +36,7 @@ bool nmhash32_broken(volatile char* entropy) {
 
   printf("%04x\n", acc);
 
-  return (acc != UINT32_C(0x249abaee));
+  return (acc);
 }
 
 const char entropy[] =
@@ -44,6 +44,6 @@ const char entropy[] =
     "SVRaDJhbEZCq7ki1D6KxpKQSjgwqsiHGSgHLxvPG5kcRnBhjJ1YC8kuh";
 
 int main(int argc, const char** argv) {
-  printf("%d\n", nmhash32_broken((volatile char*)entropy));
+  printf("%d\n", nmhash32_broken((volatile char*)entropy) != UINT32_C(0x249abaee));
   return 0;
 }
