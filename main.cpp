@@ -24,16 +24,9 @@ uint32_t nmhash32_broken(volatile char* entropy) {
     ((uint16_t*)accX)[i] *= ((uint16_t*)__NMH_M1_V)[i];
   }
 
-  for (i = 0; i < 32; ++i) {
-    printf("%04x ", accX[i]);
-  }
-  printf("\n");
-
   uint32_t acc = 0;
   for (i = 0; i < 32; ++i)
     acc += accX[i];
-
-  printf("%04x\n", acc);
 
   return (acc);
 }
