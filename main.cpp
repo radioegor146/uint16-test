@@ -16,7 +16,7 @@ static const uint32_t __NMH_M1_V[32] = {
 bool nmhash32_broken(volatile char* entropy) {
 
   uint32_t accX[32];
-  memcpy(accX, entropy, sizeof(accX));
+  memcpy(accX, (void*)entropy, sizeof(accX));
 
   size_t i;
 
