@@ -13,5 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: /Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_INT128 -DHAVE_INT64 -DHAVE_KHASHV -DNCPU=3 -D__STDC_FORMAT_MACROS  -std=c++17 -std=c++11 -march=native -DLTO -O3 -DNDEBUG -flto=thin -arch arm64 -isysroot /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fPIE -std=c++0x -MD -MT main.cpp.o -MF main.cpp.o.d -o main.cpp.o -c main.cpp
-      - run: /Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isysroot /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names main.cpp.o -o main
+      - run: /Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isysroot /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk main.cpp.o -o main
       - run: ./main
