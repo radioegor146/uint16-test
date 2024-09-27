@@ -29,6 +29,11 @@ bool nmhash32_broken(void) {
     ((uint16_t*)accX)[i] *= t;
   }
 
+  for (i = 0; i < 32; ++i) {
+    printf("%04x ", accX[i]);
+  }
+  printf("\n");
+
   uint32_t acc = 0;
   for (i = 0; i < 32; ++i)
     acc += accX[i];
