@@ -38,6 +38,8 @@ bool nmhash32_broken(void) {
   for (i = 0; i < 32; ++i)
     acc += accX[i];
 
+  printf("%04x\n", acc);
+
   return (acc != UINT32_C(0x249abaee));
 }
 
