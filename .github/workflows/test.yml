@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   test:
-    stategy:
+    strategy:
       matrix:
         os: [ubuntu-latest,macOS-latest]
     runs-on: ${{ matrix.os }}
