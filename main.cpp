@@ -13,7 +13,6 @@
 
 #define __NMH_M1 UINT32_C(0xF0D9649B)
 
-NMH_ALIGN(NMH_ACC_ALIGN)
 static const uint32_t __NMH_M1_V[32] = {
     __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1,
     __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1, __NMH_M1,
@@ -27,7 +26,7 @@ bool nmhash32_broken(void) {
       "rwgk8M1uxM6XX6c3teQX2yaw8FQWArmcWUSBJ8dcQQJWHYC9Wt2BmpvETxwhYcJTheTbjf49"
       "SVRaDJhbEZCq7ki1D6KxpKQSjgwqsiHGSgHLxvPG5kcRnBhjJ1YC8kuh";
 
-  NMH_ALIGN(NMH_ACC_ALIGN) uint32_t accX[32];
+  uint32_t accX[32];
   memcpy(accX, entropy, sizeof(accX));
 
   size_t i;
